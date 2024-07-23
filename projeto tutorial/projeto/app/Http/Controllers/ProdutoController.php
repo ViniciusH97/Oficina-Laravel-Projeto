@@ -14,13 +14,13 @@ class ProdutoController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nome' => 'required|string|max:255',
-            'descricao' => 'nullable|string',
-            'preco' => 'required|numeric',
+        $validateData = $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required',
+            'preco' => 'required|numeric'
         ]);
 
-        Produto::create($validatedData);
+        Produto::create($validateData);
 
         return redirect()->route('listagem')->with('success', 'Produto cadastrado com sucesso!');
     }
@@ -28,6 +28,6 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::all();
-        return view('listagem', compact('produtos'));
+        return view('listagem', ['produtos' => $produtos]);
     }
 }
