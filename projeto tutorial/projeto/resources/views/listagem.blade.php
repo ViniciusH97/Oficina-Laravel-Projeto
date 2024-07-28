@@ -49,6 +49,13 @@
                     <td>{{ $produto->descricao }}</td>
                     <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
                     <td>{{ $produto->created_at->format('d/m/Y') }}</td>
+                    <td>
+                        <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -56,4 +63,3 @@
     </div>
 </body>
 </html>
-

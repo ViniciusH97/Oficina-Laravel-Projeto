@@ -30,4 +30,13 @@ class ProdutoController extends Controller
         $produtos = Produto::all();
         return view('listagem', ['produtos' => $produtos]);
     }
+
+    public function destroy($id)
+    {
+        $produto = Produto::findOrFail($id);
+        $produto->delete();
+
+        return redirect()->route('listagem')->with('success', 'Produto excluído com sucesso!');
+    }
 }
+
